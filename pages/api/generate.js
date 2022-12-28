@@ -70,7 +70,7 @@ function generatePrompt(code) {
   // Quality Rating: 9/10 - Code is concise and easy to read. The only improvement would be to check the input data type to make sure it is an array."
   // Code: ${code}`;
 
-  const promptWithoutPrefix = ` State the coding language used, purpose of the code, and give it a quality ranking
+  const promptWithoutPrefix = `State the coding language used, purpose of the code, and give it a quality ranking
   Code: ${code}`;
 
   return  promptWithoutPrefix;
