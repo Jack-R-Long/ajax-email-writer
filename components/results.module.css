@@ -10,4 +10,9 @@
         border-radius: 4px;
         text-align: center;
         cursor: pointer;
+
+        transition: transform 0.1s;
+}
+.results button:active {
+        transform: scale(0.95);
 }

@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
 import Results from "../components/results";
+import { loadStaticPaths } from "next/dist/server/dev/static-paths-worker";
 
 export default function Home() {
   const [recipient, setRecipient] = useState("");
@@ -89,11 +90,7 @@ export default function Home() {
             value={sentences}
             onChange={(e) => setSentences(e.target.value)}
           />
-          {loading ?
-            (
-              <p>Loading</p>
-            ) : (<input type="submit" value="Create email" />
-            )}
+          <input type="submit" value={loading ? 'loading' : 'Create email'} disabled={loading}/>
         </form>
         {/* <div className={styles.result}>{result}</div> */}
         <Results data={result} />
