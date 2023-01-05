@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useState } from "react";
 import styles from "./index.module.css";
+import Results from "../components/results";
 
 export default function Home() {
   const [recipient, setRecipient] = useState("");
@@ -8,10 +9,12 @@ export default function Home() {
   const [description, setDescription] = useState("");
   const [sentences, setSentences] = useState("6");
   const [result, setResult] = useState();
+  const [loading, setLoading] = useState(false);
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
+      setLoading(true);
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -26,6 +29,7 @@ export default function Home() {
       });
 
       const data = await response.json();
+      setLoading(false);
       if (response.status !== 200) {
         throw (
           data.error ||
@@ -85,12 +89,15 @@ export default function Home() {
             value={sentences}
             onChange={(e) => setSentences(e.target.value)}
           />
-          <input type="submit" value="Create email" />
+          {loading ?
+            (
+              <p>Loading</p>
+            ) : (<input type="submit" value="Create email" />
+            )}
         </form>
         {/* <div className={styles.result}>{result}</div> */}
-        <div>
-          <p>{result}</p>
-        </div>
+        <Results data={result} />
+
       </main>
     </div>
   );
