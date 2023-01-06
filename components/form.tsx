@@ -25,6 +25,7 @@ export default function Form({ result, setResult }: FormProps) {
     const descriptionRegex = /^(([^.!?]|[^.!?][^.!?]*[.!?]){3,250}){1,5}$/;
 
     function validateForm() {
+        resetValidation();
         let valid = true;
         if (!recipientRegex.test(recipient)) {
             setRecipientError('Invalid recipient name');
@@ -55,7 +56,6 @@ export default function Form({ result, setResult }: FormProps) {
     async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (validateForm()) {
-            resetValidation();
             try {
                 setLoading(true);
                 setResult(undefined)
@@ -135,7 +135,9 @@ export default function Form({ result, setResult }: FormProps) {
                 />
                 <div className={styles.formError}>{sentencesError}</div>
 
-                <input type="submit" value={loading ? 'loading' : 'Create email'} disabled={loading} />
+                <button type="submit" disabled={loading} >
+                    {loading ? <div><span className={styles.loadingIcon}>🤖</span></div> : 'Create email'}
+                </button>
                 <p>{apiError}</p>
             </form>
         </div>

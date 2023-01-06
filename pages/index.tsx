@@ -13,7 +13,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Ajax Writer</title>
-        <link rel="icon" href="/dog.png" />
+        <link rel="icon" href="/favicon-32x32.png" />
       </Head>
 
       <main className={styles.main}>
