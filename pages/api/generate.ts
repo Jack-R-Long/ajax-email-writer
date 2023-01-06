@@ -54,13 +54,13 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     console.log(completion.data)
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(err) {
-    const openaiError = err as OpenAiError;
     // Consider adjusting the error handling logic for your use case
-    if (openaiError.response) {
+    if (err) {
+      const openaiError = err as OpenAiError;
       console.error(openaiError.response.status, openaiError.response.data);
       res.status(openaiError.response.status).json(openaiError.response.data);
     } else {
-      console.error(`Error with OpenAI API request: ${openaiError.message}`);
+      console.error(`Error with OpenAI API request: ${err}`);
       res.status(500).json({
         error: {
           message: 'An error occurred during your request.',

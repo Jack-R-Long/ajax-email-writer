@@ -9,8 +9,6 @@
 
 .results pre {
   font-size: 16px;
-  font-family: "ColfaxAI", Helvetica, sans-serif;
-
   display: flex;
   flex-direction: column;
 
