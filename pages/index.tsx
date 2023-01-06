@@ -61,14 +61,14 @@ export default function Home() {
           <input
             type="text"
             name="recipient"
-            placeholder="Recipient (Mr. Tim Long)"
+            placeholder="Recipient"
             value={recipient}
             onChange={(e) => setRecipient(e.target.value)}
           />
           <input
             type="text"
             name="company"
-            placeholder="Company (Smart Caregiver)"
+            placeholder="Organization"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
           />
@@ -76,7 +76,7 @@ export default function Home() {
             rows={4}
             cols={50}
             name="content"
-            placeholder="Purpose (I am writing to apply for the position of Senior Software Engineer)"
+            placeholder="Message (2-3 sentences describing the purpose of the email)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
