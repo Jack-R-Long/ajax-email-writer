@@ -22,7 +22,7 @@ export default function Form({ result, setResult }: FormProps) {
 
     const recipientRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
     const organizationRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+( [a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+)*$/;
-    const descriptionRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+( [a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+){1,3}$/;
+    const descriptionRegex = /^(([^.!?]|[^.!?][^.!?]*[.!?]){3,250}){1,5}$/;
 
     function validateForm() {
         let valid = true;
