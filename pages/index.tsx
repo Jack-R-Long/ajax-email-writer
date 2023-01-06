@@ -16,6 +16,7 @@ export default function Home() {
     event.preventDefault();
     try {
       setLoading(true);
+      setResult(undefined)
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {

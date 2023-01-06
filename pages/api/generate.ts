@@ -73,8 +73,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 function generateEmailPrompt(recipient: string, company: string, description: string, sentences: number) {
   console.log(recipient, company, description, sentences);
   const prompt = `Write a professional email to ${recipient} who works at ${company}.  
-  Write a succinct email describing ${description}.
-  Max length ${sentences} sentences.
+  Write an email describing ${description}.
+  Total length ${sentences} sentences.
   `;
 
   return prompt;

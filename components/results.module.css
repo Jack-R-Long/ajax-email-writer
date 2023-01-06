@@ -1,18 +1,36 @@
+.results {
+  width: 640px;
+}
+@media (max-width: 480px) {
+  .results {
+    width: 320px;
+  }
+}
+
 .results pre {
-    font-size: 16px;
-    font-family: "ColfaxAI", Helvetica, sans-serif;
+  font-size: 16px;
+  font-family: "ColfaxAI", Helvetica, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* nternet Explorer 5.5+ */
 }
 .results button {
-        padding: 12px 12px;
-        color: #fff;
-        background-color: #10a37f;
-        border: none;
-        border-radius: 4px;
-        text-align: center;
-        cursor: pointer;
+  padding: 12px 12px;
+  color: #fff;
+  background-color: #10a37f;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
 
-        transition: transform 0.1s;
+  transition: transform 0.1s;
 }
 .results button:active {
-        transform: scale(0.95);
+  transform: scale(0.95);
 }
