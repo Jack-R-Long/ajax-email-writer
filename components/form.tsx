@@ -51,6 +51,7 @@ export default function Form({ result, setResult }: FormProps) {
         setOrganizationError('');
         setDescriptionError('');
         setSentencesError('');
+        setAPIError('');
     }
 
     async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -138,7 +139,8 @@ export default function Form({ result, setResult }: FormProps) {
                 <button type="submit" disabled={loading} >
                     {loading ? <div><span className={styles.loadingIcon}>🤖</span></div> : 'Create email'}
                 </button>
-                <p>{apiError}</p>
+                <p className={styles.formError}>{apiError}</p>
+                {apiError && <a href="https://status.openai.com/" target="_blank">Check OpenAI status</a>}
             </form>
         </div>
     )
