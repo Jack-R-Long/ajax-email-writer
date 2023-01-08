@@ -12,17 +12,14 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Ajax Writer</title>
-        <link rel="icon" href="/favicon-32x32.png" />
+        <title>Ajax Email Writer</title>        
       </Head>
 
       <main className={styles.main}>
-        <h3>✍️ Ajax Writer</h3>
+        <h3>✍️ Ajax Email Writer</h3>
         <Form result={result} setResult={setResult} />
 
-        {/* <div className={styles.result}>{result}</div> */}
         <Results data={result} />
-
       </main>
     </div>
   );
