@@ -26,7 +26,12 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     return;
   }
   // TODO - better input validation
-  const {recipient, company, description, sentences} = req.body;
+  const {recipient, description, sentences} = req.body;
+  let {company} = req.body;
+  if (!company) {
+    company = "none";
+  }
+
   if (!recipient || !company || !description || !sentences) {
     res.status(400).json({
       error: {
@@ -78,10 +83,16 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
 function generateEmailPrompt(recipient: string, company: string, description: string, sentences: number) {
   console.log(recipient, company, description, sentences);
-  const prompt = `Write a professional email to ${recipient} who works at ${company}.  
-  Write an email describing ${description}.
-  Total length ${sentences} sentences.
-  `;
-
+  let prompt = '';
+  if (company === "none") {
+    prompt = `Write a professional email to ${recipient}.
+    Write an email describing ${description}.
+    Total length ${sentences} sentences.`
+  } else {
+    prompt = `Write a professional email to ${recipient} who works at ${company}.  
+    Write an email describing ${description}.
+    Total length ${sentences} sentences.
+    `;
+  }
   return prompt;
 }

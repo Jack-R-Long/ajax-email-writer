@@ -31,7 +31,7 @@ export default function Form({ result, setResult }: FormProps) {
             setRecipientError('Invalid recipient name');
             valid = false;
         }
-        if (!organizationRegex.test(organization)) {
+        if (!organizationRegex.test(organization) && organization.length > 0) {
             setOrganizationError('Invalid organization name');
             valid = false;
         }
@@ -108,7 +108,7 @@ export default function Form({ result, setResult }: FormProps) {
                 <input
                     type="text"
                     name="company"
-                    placeholder="Organization"
+                    placeholder="Organization (optional)"
                     value={organization}
                     onChange={(e) => setOrganization(e.target.value)}
                 />
