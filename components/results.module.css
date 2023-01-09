@@ -32,3 +32,10 @@
 .results button:active {
   transform: scale(0.95);
 }
+.feedbackLink {
+  margin-left: 12px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
