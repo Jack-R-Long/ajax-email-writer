@@ -1,9 +1,10 @@
 import { Configuration, OpenAIApi } from "openai";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
+
 const openai = new OpenAIApi(configuration);
 
 interface OpenAiError extends Error {
@@ -15,15 +16,22 @@ interface OpenAiError extends Error {
   }; 
 }
 
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+export default async function (req: NextRequest) {
   if (!configuration.apiKey) {
-    res.status(500).json({
-      error: {
-        message:
-          "OpenAI API key not configured, please follow instructions in README.md",
-      },
-    });
-    return;
+    return new Response(
+      JSON.stringify({
+        error: {
+          message:
+            "OpenAI API key not configured, please follow instructions in README.md",
+        },
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
   }
   // TODO - better input validation
   const {recipient, description, sentences} = req.body;
@@ -33,20 +41,34 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (!recipient || !company || !description || !sentences) {
-    res.status(400).json({
-      error: {
-        message: "Missing required parameters",
-      },
-    });
-    return;
+    return new Response(
+      JSON.stringify({
+        error: {
+          message: "Missing required parameters",
+        },
+      }),
+      {
+        status: 400,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
   } 
   else if (sentences < 2 || sentences > 10) {
-    res.status(400).json({
-      error: {
-        message: "Sentences must be between 2 and 10",
-      },
-    });
-    return;
+    return new Response(
+      JSON.stringify({
+        error: {
+          message: "Sentences must be between 2 and 10",
+        },
+      }),
+      {
+        status: 400,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
   }
 
   try {
@@ -57,7 +79,15 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       max_tokens: 256,
     });
     console.log(completion.data)
-    res.status(200).json({ result: completion.data.choices[0].text });
+    return new Response(
+      JSON.stringify({ result: completion.data.choices[0].text }),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    )
   } catch(err) {
     // Consider adjusting the error handling logic for your use case
     // if (err) {
@@ -73,11 +103,19 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     //   });
     // }
     console.error(`Error with OpenAI API request: ${err}`);
-    res.status(500).json({
-      error: {
-        message: 'Error ocurred.  OpenAI API may be down.',
+    return new Response(
+      JSON.stringify({
+        error: {
+          message: 'Error ocurred.  OpenAI API may be down.',
+        }
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    )
   }
 }
 
