@@ -20,8 +20,8 @@ export default function Form({ result, setResult }: FormProps) {
     const [sentencesError, setSentencesError] = useState('')
     const [apiError, setAPIError] = useState('')
 
-    const recipientRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-    const organizationRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+( [a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+)*$/;
+    const recipientRegex = /^[\w\-']{1,20}( [\w\-']{1,20}){0,5}$/;
+    const organizationRegex = /^[\w\-']{1,20}( [\w\-']{1,20}){0,5}$/;
     const descriptionRegex = /^(([^.!?]|[^.!?][^.!?]*[.!?]){3,250}){1,5}$/;
 
     function validateForm() {
@@ -102,6 +102,7 @@ export default function Form({ result, setResult }: FormProps) {
                     name="recipient"
                     placeholder="Recipient"
                     value={recipient}
+                    maxLength={20}
                     onChange={(e) => setRecipient(e.target.value)}
                 />
                 <div className={styles.formError}>{recipientError}</div>
@@ -110,6 +111,7 @@ export default function Form({ result, setResult }: FormProps) {
                     name="company"
                     placeholder="Organization (optional)"
                     value={organization}
+                    maxLength={20}
                     onChange={(e) => setOrganization(e.target.value)}
                 />
                 <div className={styles.formError}>{organizationError}</div>
@@ -119,6 +121,7 @@ export default function Form({ result, setResult }: FormProps) {
                     name="content"
                     placeholder="Message (2-3 sentences describing the purpose of the email)"
                     value={description}
+                    maxLength={250}
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 <div className={styles.formError}>{descriptionError}</div>
