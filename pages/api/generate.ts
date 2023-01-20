@@ -6,15 +6,6 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-interface OpenAiError extends Error {
-  response: {
-    status: number;
-    data: {
-      error: string;
-    };
-  }; 
-}
-
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (!configuration.apiKey) {
     res.status(500).json({
@@ -54,7 +45,8 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
       model: "text-davinci-003",
       prompt: generateEmailPrompt(recipient, company, description, sentences),
       temperature: 0.7,
-      max_tokens: 256,
+      max_tokens: 1000,
+      frequency_penalty: 1.0,
     });
     console.log(completion.data)
     res.status(200).json({ result: completion.data.choices[0].text });
