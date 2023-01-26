@@ -1,13 +1,12 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import styles from "./form.module.css";
-import { ApiError } from "next/dist/server/api-utils";
 
 interface FormProps {
     result: string | undefined;
     setResult: Dispatch<SetStateAction<undefined>>;
 }
 
-export default function Form({ result, setResult }: FormProps) {
+export default function ComposeForm({ result, setResult }: FormProps) {
     const [recipient, setRecipient] = useState('');
     const [organization, setOrganization] = useState('');
     const [description, setDescription] = useState('');
